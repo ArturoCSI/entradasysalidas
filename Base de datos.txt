@@ -1,0 +1,38 @@
+create table Departamentos(
+id_Departamentos int primary key identity(1,1) not null,
+Nombre_Departamento varchar(50) not null);
+
+insert into Departamentos (Nombre_Departamento)  values ('RH')
+insert into Departamentos (Nombre_Departamento)  values ('Software')
+insert into Departamentos (Nombre_Departamento)  values ('Gerencia')
+insert into Departamentos (Nombre_Departamento)  values ('Fundicion')
+insert into Departamentos (Nombre_Departamento)  values ('Mantenimiento')
+
+
+create table Usuarios(
+id_Usuarios int primary key identity(1,1) not null,
+Nombre varchar(50) not null,
+Correo varchar(50) not null,
+Contraseña varchar(50) not null);
+
+insert into Usuarios (Nombre, Correo, Contraseña) values ('Maria Guadalupe', 'Maria123','prueba1234')
+
+create table Empleados(
+id_Empleados int primary key identity(1,1) not null,
+Nombre varchar(50) not null,
+Apellido varchar(50) not null,
+id_depa int not null,
+CONSTRAINT fk_EmpleadoDepartamento FOREIGN KEY (id_depa) references Departamentos(id_Departamentos));
+
+insert into Empleados(Nombre,Apellido,id_depa) VALUES ('Maria Guadalupe','Flores Mendoza',2)
+insert into Empleados(Nombre,Apellido,id_depa) VALUES ('Pedro','Perez',3)
+
+create table EntradasYSalidas(id_EntradaSalida int primary key identity(1,1) not null,
+id_empleados int not null,
+Tipo varchar(50) not null,
+Fecha date not null,
+Hora time not null,
+CONSTRAINT fk_EmpleadoEYS FOREIGN KEY (id_empleados) references Empleados(id_Empleados));
+
+
+insert into EntradasYSalidas(id_empleados,Tipo, Fecha,Hora) values(1,'Entrada',12-06-2023,09-00)
